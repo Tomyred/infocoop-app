@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router";
@@ -43,7 +43,7 @@ const RatesForm = () => {
 
     const defaultValues = rateId ? entity : null
 
-    const {reset, formState, watch, control, getValues, handleSubmit, setValue,} = useForm({
+    const { formState, control, getValues} = useForm({
         defaultValues,
         mode: "onChange",
         resolver: yupResolver(schema),
@@ -63,7 +63,7 @@ const RatesForm = () => {
 
 
 
-    const { isValid, dirtyFields, errors } = formState;
+    const { isValid, errors } = formState;
 
     
     const onSaveHandler = () => {

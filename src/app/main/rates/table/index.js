@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoadingScreen from "../../../../pages/loadingScreen";
 import { deleteRate, loadRates, setEntityToUpdate } from "../store/actions";
 import TableHead from "./tableHead";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -31,6 +31,10 @@ const RatesTable = () => {
     }, [loaded,deleted, deletingError]);
 
     if (loading) {
+        return <LoadingScreen />;
+    }
+
+    if (deleting) {
         return <LoadingScreen />;
     }
 

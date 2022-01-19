@@ -9,11 +9,11 @@ const lightText = {
     disabled: "rgb(149, 156, 169)",
 };
 
-const darkText = {
-    primary: "rgb(255,255,255)",
-    secondary: "rgb(229, 231, 235)",
-    disabled: "rgb(156, 163, 175)",
-};
+// const darkText = {
+//     primary: "rgb(255,255,255)",
+//     secondary: "rgb(229, 231, 235)",
+//     disabled: "rgb(156, 163, 175)",
+// };
 
 const theme = createTheme({
     palette: {
