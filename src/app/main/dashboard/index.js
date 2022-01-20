@@ -15,7 +15,6 @@ import Typography from "@mui/material/Typography";
 import navigationConfig from "../../config/navigationConfig";
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
-import { ListItemButton } from "@mui/material";
 import routes from "../../config/routesConfig";
 
 
@@ -35,15 +34,13 @@ function Dashboard(props) {
             <Divider />
             <List>
                 {navigationConfig.map(element => (
-                    <ListItem button key={element.title}>
+                    <ListItem component={Link} to={element.route} button key={element.title}>
                         {element.icon ? (
                             <ListItemIcon>{element.icon}</ListItemIcon>
                         ) : (
                             ""
                         )}
-                        <ListItemButton component={Link} to={element.route}>
-                            <Typography>{element.title}</Typography>
-                        </ListItemButton>
+                        <Typography>{element.title}</Typography>
                     </ListItem>
                 ))}
             </List>
