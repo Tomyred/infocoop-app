@@ -51,7 +51,7 @@ const RatesForm = () => {
 
     useEffect(() => {
         if (saved) {
-            return navigate(-1);
+            goBack();
         }
     }, [saved]);
 
@@ -72,8 +72,11 @@ const RatesForm = () => {
         }else{
             dispatch(saveRate(getValues()));
         }
-        
     };
+
+    const goBack = () => {
+        navigate(-1);
+    }
 
     if (saving) {
         return <LoadingScreen />;
@@ -97,7 +100,6 @@ const RatesForm = () => {
                 <Button
                     onClick={onSaveHandler}
                     sx={{ flexDirection: 'row-reverse' }}
-                    color="inherit"
                     variant="contained"
                     color="secondary"
                     disabled={!isValid}
