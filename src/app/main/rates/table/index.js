@@ -28,6 +28,7 @@ const RatesTable = () => {
             alert("Ocurrio un error al borrar el elemento. Cargue de nuevo la página e inténtelo nuevamente")
             
         }
+        // eslint-disable-next-line
     }, [loaded,deleted, deletingError]);
 
     if (loading) {
