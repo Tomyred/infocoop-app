@@ -48,11 +48,12 @@ const RatesForm = () => {
         mode: "onChange",
         resolver: yupResolver(schema),
     });
-
+    
     useEffect(() => {
         if (saved) {
             goBack();
         }
+        // eslint-disable-next-line
     }, [saved]);
 
     useEffect(() => {
