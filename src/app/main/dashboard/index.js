@@ -16,6 +16,7 @@ import navigationConfig from "../../config/navigationConfig";
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
 import routes from "../../config/routesConfig";
+import Container from '@mui/material/Container';
 
 
 const drawerWidth = 240;
@@ -127,23 +128,26 @@ function Dashboard(props) {
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    p: 5,
+                    p: 3,
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                 }}
             >
                 <Toolbar />
+                <Container>
                 <Routes>
                     {routes.map((route, i) => {
                         return (
-                            <Route
-                                key={i}
-                                path={route.path}
-                                exact={route.exact}
-                                element={route.component}
-                            />
+                            
+                                <Route
+                                    key={i}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    element={route.component}
+                                    />
                         );
                     })}
                 </Routes>
+                </Container>
             </Box>
         </Box>
     );
