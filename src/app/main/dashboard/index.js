@@ -83,7 +83,7 @@ function Dashboard(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        {"{{Nombre de establecimiento}}"}
+                    InfoCoop
                     </Typography>
                 </Toolbar>
             </AppBar>
