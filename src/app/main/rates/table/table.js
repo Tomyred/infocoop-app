@@ -55,7 +55,7 @@ const RatesTable = () => {
     const filterData = () => {
         return data.filter(
             data => data.description.toLowerCase().includes(searchText.toLowerCase()) |
-                    data.type.toLowerCase().includes(searchText.toLowerCase()) |
+                    data.value.toString().includes(searchText.toLowerCase()) |
                     data.observations.toLowerCase().includes(searchText.toLowerCase())
         );
     };
