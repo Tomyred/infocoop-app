@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { makeStyles } from "@mui/styles";
 import { saveRate, updateRate } from "../store/actions";
-import LoadingScreen from "../../../../pages/loadingScreen";
+import LoadingScreen from "../../../pages/loadingScreen";
 
 const schema = yup.object().shape({
     description: yup.string().required("Este campo es requerido"),

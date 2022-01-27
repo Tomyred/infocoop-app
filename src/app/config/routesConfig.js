@@ -1,6 +1,6 @@
-import Error404page from "../../pages/error404Page";
+import Error404page from "../pages/error404Page";
 import RatesForm from "../main/rates/form";
-import RatesTable from "../main/rates/table";
+import RatesTable from "../main/rates";
 
 const routes = [
     {

@@ -9,7 +9,8 @@ const initState = {
     savingError: false,
     deleted: false,
     deleting: false,
-    deletingError: false
+    deletingError: false,
+    searchText: "",
 };
 
 const reducer = (state = initState, action) => {
@@ -67,20 +68,26 @@ const reducer = (state = initState, action) => {
                 deleting: false,
                 loaded: false,
                 deleted: true,
-                deletingError: false
+                deletingError: false,
             };
         case "RATE_DELETE_FAILED":
             return {
                 ...state,
                 deleting: false,
                 deleted: false,
-                deletingError: true
+                deletingError: true,
             };
         case "SET_ENTITY_TO_UPDATE":
             return {
                 ...state,
-                entity: action.payload
-            }
+                entity: action.payload,
+            };
+        case "SEARCH_ENTRY": {
+            return {
+                ...state,
+                searchText: action.payload,
+            };
+        }
         default:
             return state;
     }

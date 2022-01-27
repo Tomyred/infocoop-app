@@ -16,8 +16,8 @@ import navigationConfig from "../../config/navigationConfig";
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
 import routes from "../../config/routesConfig";
-import Container from '@mui/material/Container';
-
+import Container from "@mui/material/Container";
+import { Paper } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -35,7 +35,12 @@ function Dashboard(props) {
             <Divider />
             <List>
                 {navigationConfig.map(element => (
-                    <ListItem component={Link} to={element.route} button key={element.title}>
+                    <ListItem
+                        component={Link}
+                        to={element.route}
+                        button
+                        key={element.title}
+                    >
                         {element.icon ? (
                             <ListItemIcon>{element.icon}</ListItemIcon>
                         ) : (
@@ -83,7 +88,7 @@ function Dashboard(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                    InfoCoop
+                        InfoCoop
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -134,19 +139,20 @@ function Dashboard(props) {
             >
                 <Toolbar />
                 <Container>
-                <Routes>
-                    {routes.map((route, i) => {
-                        return (
-                            
-                                <Route
-                                    key={i}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    element={route.component}
+                    <Paper>
+                        <Routes>
+                            {routes.map((route, i) => {
+                                return (
+                                    <Route
+                                        key={i}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        element={route.component}
                                     />
-                        );
-                    })}
-                </Routes>
+                                );
+                            })}
+                        </Routes>
+                    </Paper>
                 </Container>
             </Box>
         </Box>

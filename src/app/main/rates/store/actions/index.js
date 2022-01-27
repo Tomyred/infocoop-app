@@ -105,3 +105,10 @@ export const deleteRate = (id) => async dispatch => {
         })
     }
 }
+
+export const setSearchText = (searchText) => dispatch => {
+    dispatch({
+        type: types.SEARCH_ENTRY,
+        payload: searchText
+    })
+}
