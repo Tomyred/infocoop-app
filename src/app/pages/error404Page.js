@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
     container: {
-        height: "85vh",
+        height: "70vh",
         display: "flex",
         justifyContent: "center",
         textAlign: "center",
