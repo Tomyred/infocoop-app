@@ -17,7 +17,7 @@ import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
 import routes from "../config/routesConfig";
 import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
+import { Icon, Paper } from "@mui/material";
 import Error404page from "../pages/error404Page";
 import { makeStyles } from "@mui/styles";
 
@@ -51,7 +51,7 @@ function Dashboard(props) {
                         key={element.title}
                     >
                         {element.icon ? (
-                            <ListItemIcon>{element.icon}</ListItemIcon>
+                            <ListItemIcon><Icon>{element.icon}</Icon></ListItemIcon>
                         ) : (
                             ""
                         )}
