@@ -5,6 +5,7 @@ import {
     TableCell,
     TablePagination,
     TableRow,
+    Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,13 +45,6 @@ const RatesTable = () => {
         // eslint-disable-next-line
     }, [loaded, deleted, deletingError]);
 
-    if (loading) {
-        return <LoadingScreen />;
-    }
-
-    if (deleting) {
-        return <LoadingScreen />;
-    }
 
     const filterData = () => {
         return data.filter(
@@ -71,6 +65,29 @@ const RatesTable = () => {
 
     function handleChangePage(event, value) {
         setPage(value);
+    }
+
+    if (loading) {
+        return <LoadingScreen />;
+    }
+
+    if (deleting) {
+        return <LoadingScreen />;
+    }
+
+    if(filterData().length === 0){
+        return(
+        <Typography
+            style={{
+                textAlign: "center",
+                margin: 50
+            }}
+            variant="h4"
+            color="textSecondary"
+            >
+            No hay datos
+        </Typography>
+        )
     }
 
     return (

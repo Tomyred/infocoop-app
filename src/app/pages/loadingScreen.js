@@ -5,11 +5,11 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
     container: {
-        height: "85vh",
+        margin: 150
     },
     child: {
         textAlign: "center",
-        marginTop: "200px",
+        marginTop: "100px",
     },
 });
 

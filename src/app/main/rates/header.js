@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         alignItems: "center",
         justifyContent: "space-between",
         width: "100%",
-        padding: 25,
+        padding: 15,
     },
     childContainer: {
         display: "flex",
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
     },
     input: {
         width: "100%",
-        borderRadius: "40%",
+        borderRadius: 16,
     },
 });
 

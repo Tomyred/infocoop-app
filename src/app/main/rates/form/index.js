@@ -108,7 +108,7 @@ const RatesForm = () => {
                     <span>Guardar</span>
                 </Button>
             </motion.div>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={12} >
                 <Controller
                     name="description"
                     control={control}
@@ -128,7 +128,7 @@ const RatesForm = () => {
                     )}
                 />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12} md={6}>
                 <Controller
                     name="value"
                     control={control}
@@ -148,7 +148,7 @@ const RatesForm = () => {
                     )}
                 />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={12} md={6} >
                 <Controller
                     name="type"
                     control={control}

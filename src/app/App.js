@@ -2,7 +2,7 @@ import { ThemeProvider } from "@mui/system";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
-import Dashboard from "./main/dashboard";
+import Dashboard from "./dashboard";
 import store from "./store/index";
 import theme from "./theme/theme";
 

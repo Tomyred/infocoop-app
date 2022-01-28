@@ -12,18 +12,27 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import navigationConfig from "../../config/navigationConfig";
+import navigationConfig from "../config/navigationConfig";
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
-import routes from "../../config/routesConfig";
+import routes from "../config/routesConfig";
 import Container from "@mui/material/Container";
 import { Paper } from "@mui/material";
+import Error404page from "../pages/error404Page";
+import { makeStyles } from "@mui/styles";
 
 const drawerWidth = 240;
+
+const useStyles = makeStyles({
+    componentContainer: {
+        padding: 25
+    }
+})
 
 function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const classes = useStyles();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -139,18 +148,19 @@ function Dashboard(props) {
             >
                 <Toolbar />
                 <Container>
-                    <Paper>
+                    <Paper  className={classes.componentContainer} elevation={3}>
                         <Routes>
-                            {routes.map((route, i) => {
-                                return (
+                            <Route path="*" exact={false} element={<Error404page />} />
+                            {routes.map((routeConfig, i) => routeConfig.map(route => {
+                                return(
                                     <Route
-                                        key={i}
-                                        path={route.path}
-                                        exact={route.exact}
-                                        element={route.component}
-                                    />
-                                );
-                            })}
+                                    key={i}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    element={route.component}
+                                />
+                                )
+                            }))}
                         </Routes>
                     </Paper>
                 </Container>
