@@ -2,10 +2,16 @@
 
 const navigationConfig = [
     {
+        title: "Inicio",
+        route: "/",
+        icon: "home",
+    },
+    {
         title: "Tarifas",
         route: "/rates",
         icon: "paid",
     },
+
 ];
 
 export default navigationConfig;

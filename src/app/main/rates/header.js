@@ -78,7 +78,8 @@ const RatesHeader = () => {
                     <Input
                         placeholder="Buscar"
                         className={classes.input}
-                        disableUnderline
+                        disableUnderline={true}
+                        autoFocus={true}
                         fullWidth
                         inputProps={{
                             "aria-label": "Search",

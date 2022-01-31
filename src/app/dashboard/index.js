@@ -16,7 +16,6 @@ import navigationConfig from "../config/navigationConfig";
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
 import routes from "../config/routesConfig";
-import Container from "@mui/material/Container";
 import { Icon, Paper } from "@mui/material";
 import Error404page from "../pages/error404Page";
 import { makeStyles } from "@mui/styles";
@@ -25,7 +24,9 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles({
     componentContainer: {
-        padding: 25
+        padding: 25,
+        overflowX: 'auto',
+        overflowY: 'auto'
     }
 })
 
@@ -147,7 +148,7 @@ function Dashboard(props) {
                 }}
             >
                 <Toolbar />
-                <Container>
+                {/* <Container> */}
                     <Paper  className={classes.componentContainer} elevation={3}>
                         <Routes>
                             <Route path="*" exact={false} element={<Error404page />} />
@@ -163,7 +164,7 @@ function Dashboard(props) {
                             }))}
                         </Routes>
                     </Paper>
-                </Container>
+                {/* </Container> */}
             </Box>
         </Box>
     );

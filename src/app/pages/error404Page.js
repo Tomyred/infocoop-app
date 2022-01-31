@@ -8,8 +8,8 @@ const useStyles = makeStyles({
         height: "70vh",
         display: "flex",
         justifyContent: "center",
-        textAlign: "center",
         alignItems: "center",
+        textAlign: "center"
     },
 });
 
