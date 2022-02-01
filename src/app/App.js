@@ -1,10 +1,8 @@
-import { ThemeProvider } from "@mui/system";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./dashboard";
 import store from "./store/index";
-import theme from "./theme/theme";
 
 const myStore = store();
 function App() {
@@ -12,9 +10,7 @@ function App() {
         <div className="App">
             <Provider store={myStore}>
                 <Router>
-                    <ThemeProvider theme={theme}>
-                        <Dashboard />
-                    </ThemeProvider>
+                    <Dashboard />
                 </Router>
             </Provider>
         </div>

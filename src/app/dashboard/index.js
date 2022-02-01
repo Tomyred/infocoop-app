@@ -16,24 +16,38 @@ import navigationConfig from "../config/navigationConfig";
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
 import routes from "../config/routesConfig";
-import { Icon, Paper } from "@mui/material";
+import { createTheme, Icon, Paper } from "@mui/material";
 import Error404page from "../pages/error404Page";
 import { makeStyles } from "@mui/styles";
+import PaletteIcon from "@mui/icons-material/Palette";
+import { ThemeProvider } from "@mui/system";
+import DashboardDialog from "./dialog";
+import { useSelector } from "react-redux";
+import { defaultTheme } from "../theme/theme";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles({
     componentContainer: {
         padding: 25,
-        overflowX: 'auto',
-        overflowY: 'auto'
-    }
-})
+        overflowX: "auto",
+        overflowY: "auto",
+    },
+    toolbar: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+});
 
 function Dashboard(props) {
     const { window } = props;
+    const [dialogToggler, setDialogToggler] = React.useState(false);
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const classes = useStyles();
+    const chosedTheme = useSelector(store => store.dashboard.theme);
+    const theme = chosedTheme === null ? defaultTheme : chosedTheme;
+    const themes = createTheme(theme);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -52,7 +66,9 @@ function Dashboard(props) {
                         key={element.title}
                     >
                         {element.icon ? (
-                            <ListItemIcon><Icon>{element.icon}</Icon></ListItemIcon>
+                            <ListItemIcon>
+                                <Icon>{element.icon}</Icon>
+                            </ListItemIcon>
                         ) : (
                             ""
                         )}
@@ -78,95 +94,114 @@ function Dashboard(props) {
         window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                sx={{
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                    ml: { sm: `${drawerWidth}px` },
-                }}
-            >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: "none" } }}
+        <ThemeProvider theme={themes}>
+            <Box sx={{ display: "flex" }}>
+                <DashboardDialog
+                    open={dialogToggler}
+                    setDialogToggler={setDialogToggler}
+                />
+                <CssBaseline />
+                <AppBar
+                    position="fixed"
+                    sx={{
+                        width: { sm: `calc(100% - ${drawerWidth}px)` },
+                        ml: { sm: `${drawerWidth}px` },
+                    }}
+                >
+                    <Toolbar className={classes.toolbar}>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={handleDrawerToggle}
+                            sx={{ mr: 2, display: { sm: "none" } }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap component="div">
+                            InfoCoop
+                        </Typography>
+                        <IconButton
+                            color="inherit"
+                            edge="end"
+                            onClick={() => setDialogToggler(true)}
+                        >
+                            <PaletteIcon />
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+                <Box
+                    component="nav"
+                    sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                    aria-label="mailbox folders"
+                >
+                    <Drawer
+                        container={container}
+                        variant="temporary"
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        ModalProps={{
+                            keepMounted: true,
+                        }}
+                        sx={{
+                            display: { xs: "block", sm: "none" },
+                            "& .MuiDrawer-paper": {
+                                boxSizing: "border-box",
+                                width: drawerWidth,
+                            },
+                        }}
                     >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        InfoCoop
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Box
-                component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-                aria-label="mailbox folders"
-            >
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true,
-                    }}
+                        {drawer}
+                    </Drawer>
+                    <Drawer
+                        variant="permanent"
+                        sx={{
+                            display: { xs: "none", sm: "block" },
+                            "& .MuiDrawer-paper": {
+                                boxSizing: "border-box",
+                                width: drawerWidth,
+                            },
+                        }}
+                        open
+                    >
+                        {drawer}
+                    </Drawer>
+                </Box>
+                <Box
+                    component="main"
                     sx={{
-                        display: { xs: "block", sm: "none" },
-                        "& .MuiDrawer-paper": {
-                            boxSizing: "border-box",
-                            width: drawerWidth,
-                        },
+                        flexGrow: 1,
+                        p: 3,
+                        width: { sm: `calc(100% - ${drawerWidth}px)` },
                     }}
                 >
-                    {drawer}
-                </Drawer>
-                <Drawer
-                    variant="permanent"
-                    sx={{
-                        display: { xs: "none", sm: "block" },
-                        "& .MuiDrawer-paper": {
-                            boxSizing: "border-box",
-                            width: drawerWidth,
-                        },
-                    }}
-                    open
-                >
-                    {drawer}
-                </Drawer>
-            </Box>
-            <Box
-                component="main"
-                sx={{
-                    flexGrow: 1,
-                    p: 3,
-                    width: { sm: `calc(100% - ${drawerWidth}px)` },
-                }}
-            >
-                <Toolbar />
-                {/* <Container> */}
-                    <Paper  className={classes.componentContainer} elevation={3}>
+                    <Toolbar />
+                    {/* <Container> */}
+                    <Paper className={classes.componentContainer} elevation={3}>
                         <Routes>
-                            <Route path="*" exact={false} element={<Error404page />} />
-                            {routes.map((routeConfig, i) => routeConfig.map(route => {
-                                return(
-                                    <Route
-                                    key={i}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    element={route.component}
-                                />
-                                )
-                            }))}
+                            <Route
+                                path="*"
+                                exact={false}
+                                element={<Error404page />}
+                            />
+                            {routes.map((routeConfig, i) =>
+                                routeConfig.map(route => {
+                                    return (
+                                        <Route
+                                            key={i}
+                                            path={route.path}
+                                            exact={route.exact}
+                                            element={route.component}
+                                        />
+                                    );
+                                })
+                            )}
                         </Routes>
                     </Paper>
-                {/* </Container> */}
+                    {/* </Container> */}
+                </Box>
             </Box>
-        </Box>
+        </ThemeProvider>
     );
 }
 
