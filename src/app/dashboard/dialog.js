@@ -7,7 +7,6 @@ import {
     CardContent,
     Dialog,
     DialogContent,
-    Icon,
     Toolbar,
     Typography,
 } from "@mui/material";
