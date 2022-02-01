@@ -58,6 +58,9 @@ const DashboardDialog = props => {
                             <Card
                                 key={i}
                                 className="flex flex-col h-256 shadow"
+                                style={{
+                                    margin: 10,
+                                }}
                             >
                                 <CardContent
                                     style={{
@@ -75,7 +78,10 @@ const DashboardDialog = props => {
                                 <CardActions className="justify-center pb-24">
                                     <Button
                                         className="justify-start px-32"
-                                        color="secondary"
+                                        style={{
+                                            backgroundColor: item.mainColor,
+                                            color: item.contrastColor,
+                                        }}
                                         variant="outlined"
                                         onClick={() =>
                                             dispatch(changeTheme(item.theme))

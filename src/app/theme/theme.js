@@ -162,10 +162,12 @@ export const themes = [
         themeName: "Tema luminoso 1",
         theme: lightTheme1,
         mainColor: "#F3B25F",
+        contrastColor: "#1E2125",
     },
     {
         themeName: "Tema luminoso 2",
         theme: lightTheme2,
         mainColor: "#80485B",
+        contrastColor: "#1E2125",
     },
 ];
