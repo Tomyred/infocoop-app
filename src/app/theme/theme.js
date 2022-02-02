@@ -149,7 +149,7 @@ export const themes = [
     {
         themeName: "Tema oscuro 1",
         theme: darkTheme1,
-        mainColor: "#1E2125",
+        mainColor: "#212a38",
         contrastColor: "#FFFFFF",
     },
     {

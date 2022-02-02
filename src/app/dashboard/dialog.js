@@ -75,12 +75,18 @@ const DashboardDialog = props => {
                                         {item.themeName}
                                     </Typography>
                                 </CardContent>
-                                <CardActions className="justify-center pb-24">
+                                <CardActions
+                                    style={{
+                                        backgroundColor:
+                                            item.theme.palette.background.paper,
+                                    }}
+                                >
                                     <Button
                                         className="justify-start px-32"
                                         style={{
                                             backgroundColor: item.mainColor,
                                             color: item.contrastColor,
+                                            border: item.mainColor,
                                         }}
                                         variant="outlined"
                                         onClick={() =>
