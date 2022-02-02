@@ -42,7 +42,7 @@ const DashboardDialog = props => {
             maxWidth="xs"
         >
             <AppBar position="static" elevation={0}>
-                <Toolbar className="flex w-full">
+                <Toolbar>
                     <Typography variant="subtitle1" color="inherit">
                         Temas
                     </Typography>
@@ -51,13 +51,12 @@ const DashboardDialog = props => {
                     Elejir tema de aplicación
                 </div>
             </AppBar>
-            <div className="flex flex-col md:overflow-hidden">
+            <div>
                 <DialogContent classes={{ root: "p-24" }}>
                     {themes.map((item, i) => {
                         return (
                             <Card
                                 key={i}
-                                className="flex flex-col h-256 shadow"
                                 style={{
                                     margin: 10,
                                 }}
@@ -69,11 +68,8 @@ const DashboardDialog = props => {
                                             ? item.contrastColor
                                             : "",
                                     }}
-                                    className="flex flex-col flex-auto items-center justify-center"
                                 >
-                                    <Typography className="text-center text-16 font-medium">
-                                        {item.themeName}
-                                    </Typography>
+                                    <Typography>{item.themeName}</Typography>
                                 </CardContent>
                                 <CardActions
                                     style={{
@@ -82,7 +78,6 @@ const DashboardDialog = props => {
                                     }}
                                 >
                                     <Button
-                                        className="justify-start px-32"
                                         style={{
                                             backgroundColor: item.mainColor,
                                             color: item.contrastColor,
@@ -100,29 +95,6 @@ const DashboardDialog = props => {
                         );
                     })}
                 </DialogContent>
-
-                {/* <DialogActions className="justify-between p-4 pb-16">
-        
-        <div className="px-16">
-        
-          <Button
-            variant="contained"
-            color="secondary"
-            type="submit"
-            disabled={_.isEmpty(dirtyFields) || !isValid}
-          >
-            Guardar
-          </Button>
-          <Button
-            variant="contained"
-            type="reset"
-            onClick={closeDialog}
-          >
-            Cancelar
-          </Button>
-        </div>
-
-      </DialogActions> */}
             </div>
         </Dialog>
     );

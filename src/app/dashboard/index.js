@@ -77,16 +77,6 @@ function Dashboard(props) {
                 ))}
             </List>
             <Divider />
-            {/* <List>
-                {["Analitica", "Horarios", "Opcion 3"].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                        </ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List> */}
         </div>
     );
 
@@ -176,12 +166,11 @@ function Dashboard(props) {
                     }}
                 >
                     <Toolbar />
-                    {/* <Container> */}
                     <Paper className={classes.componentContainer} elevation={3}>
                         <Routes>
                             <Route
                                 path="*"
-                                exact={false}
+                                exact={true}
                                 element={<Error404page />}
                             />
                             {routes.map((routeConfig, i) =>
@@ -198,7 +187,6 @@ function Dashboard(props) {
                             )}
                         </Routes>
                     </Paper>
-                    {/* </Container> */}
                 </Box>
             </Box>
         </ThemeProvider>
