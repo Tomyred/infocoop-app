@@ -7,11 +7,18 @@ const navigationConfig = [
         icon: "home",
     },
     {
-        title: "Tarifas",
+        title: "Estacionamiento",
+        collapse: true,
+        icon: "drive_eta",
         route: "/rates",
-        icon: "paid",
+        children: [
+            {
+                title: "Tarifas",
+                route: "/rates",
+                icon: "paid",
+            },
+        ],
     },
-
 ];
 
 export default navigationConfig;

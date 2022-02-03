@@ -16,7 +16,13 @@ import navigationConfig from "../config/navigationConfig";
 import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
 import routes from "../config/routesConfig";
-import { createTheme, Icon, Paper } from "@mui/material";
+import {
+    Collapse,
+    createTheme,
+    Icon,
+    ListItemText,
+    Paper,
+} from "@mui/material";
 import Error404page from "../pages/error404Page";
 import { makeStyles } from "@mui/styles";
 import PaletteIcon from "@mui/icons-material/Palette";
@@ -24,6 +30,7 @@ import { ThemeProvider } from "@mui/system";
 import DashboardDialog from "./dialog";
 import { useSelector } from "react-redux";
 import { defaultTheme } from "../theme/theme";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -41,6 +48,7 @@ const useStyles = makeStyles({
 });
 
 function Dashboard(props) {
+    console.log(props);
     const { window } = props;
     const [dialogToggler, setDialogToggler] = React.useState(false);
     const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -53,30 +61,90 @@ function Dashboard(props) {
         setMobileOpen(!mobileOpen);
     };
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = element => {
+        setOpen({ [element]: !open[element] });
+    };
+
     const drawer = (
         <div>
             <Toolbar />
             <Divider />
             <List>
-                {navigationConfig.map(element => (
-                    <ListItem
-                        component={Link}
-                        to={element.route}
-                        button
-                        key={element.title}
-                    >
-                        {element.icon ? (
-                            <ListItemIcon>
-                                <Icon>{element.icon}</Icon>
-                            </ListItemIcon>
-                        ) : (
-                            ""
-                        )}
-                        <Typography>{element.title}</Typography>
-                    </ListItem>
-                ))}
+                {navigationConfig.map((element, i) =>
+                    element.collapse ? (
+                        <div key={element.title}>
+                            <ListItem
+                                onClick={() => handleClick(element.title)}
+                                button
+                            >
+                                {element.icon ? (
+                                    <ListItemIcon>
+                                        <Icon>{element.icon}</Icon>
+                                    </ListItemIcon>
+                                ) : (
+                                    ""
+                                )}
+                                <ListItemText primary={element.title} />
+                                {open[element.title] ? (
+                                    <ExpandLess />
+                                ) : (
+                                    <ExpandMore />
+                                )}
+                            </ListItem>
+                            <Collapse in={open[element.title]}>
+                                <List>
+                                    {element.children.map(child => {
+                                        return (
+                                            <ListItem
+                                                component={Link}
+                                                to={child.route}
+                                                button
+                                                key={child.title}
+                                            >
+                                                {child.icon ? (
+                                                    <ListItemIcon>
+                                                        <Icon>
+                                                            {child.icon}
+                                                        </Icon>
+                                                    </ListItemIcon>
+                                                ) : (
+                                                    ""
+                                                )}
+                                                <ListItemText
+                                                    primary={child.title}
+                                                />
+                                                <Divider />
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
+                            </Collapse>
+                            <Divider />
+                        </div>
+                    ) : (
+                        <div key={element.title}>
+                            <ListItem
+                                component={Link}
+                                to={element.route}
+                                button
+                            >
+                                {element.icon ? (
+                                    <ListItemIcon>
+                                        <Icon>{element.icon}</Icon>
+                                    </ListItemIcon>
+                                ) : (
+                                    ""
+                                )}
+                                <ListItemText primary={element.title} />
+                            </ListItem>
+                            <Divider />
+                        </div>
+                    )
+                )}
             </List>
-            <Divider />
+            {/* <Divider /> */}
         </div>
     );
 
@@ -195,6 +263,7 @@ function Dashboard(props) {
 
 Dashboard.propTypes = {
     window: PropTypes.func,
+    asdas: "dasdsad",
 };
 
 export default Dashboard;
