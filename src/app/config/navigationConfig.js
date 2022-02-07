@@ -10,7 +10,6 @@ const navigationConfig = [
         title: "Estacionamiento",
         collapse: true,
         icon: "drive_eta",
-        route: "/rates",
         children: [
             {
                 title: "Tarifas",
@@ -18,6 +17,11 @@ const navigationConfig = [
                 icon: "paid",
             },
         ],
+    },
+    {
+        title: "Cop. Independencia",
+        icon: "business",
+        route: "/keypad",
     },
 ];
 

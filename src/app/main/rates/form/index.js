@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { makeStyles } from "@mui/styles";
-import { saveRate, updateRate } from "../store/actions";
+import { saveRate, updateRate } from "../store/actions/rates";
 import LoadingScreen from "../../../pages/loadingScreen";
 
 const schema = yup.object().shape({
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     buttonContainer: {
         display: "flex",
         justifyContent: "space-between",
-        width: "100%"
+        width: "100%",
     },
     backButton: {
         textAlign: "center",
@@ -41,14 +41,14 @@ const RatesForm = () => {
     const savingError = useSelector(store => store.rates.savingError);
     const classes = useStyles();
 
-    const defaultValues = rateId ? entity : null
+    const defaultValues = rateId ? entity : null;
 
-    const { formState, control, getValues} = useForm({
+    const { formState, control, getValues } = useForm({
         defaultValues,
         mode: "onChange",
         resolver: yupResolver(schema),
     });
-    
+
     useEffect(() => {
         if (saved) {
             goBack();
@@ -62,22 +62,19 @@ const RatesForm = () => {
         }
     }, [savingError]);
 
-
-
     const { isValid, errors } = formState;
 
-    
     const onSaveHandler = () => {
-        if(rateId){
-            dispatch(updateRate(getValues(), getValues()._id))
-        }else{
+        if (rateId) {
+            dispatch(updateRate(getValues(), getValues()._id));
+        } else {
             dispatch(saveRate(getValues()));
         }
     };
 
     const goBack = () => {
         navigate(-1);
-    }
+    };
 
     if (saving) {
         return <LoadingScreen />;
@@ -100,7 +97,7 @@ const RatesForm = () => {
                 </Button>
                 <Button
                     onClick={onSaveHandler}
-                    sx={{ flexDirection: 'row-reverse' }}
+                    sx={{ flexDirection: "row-reverse" }}
                     variant="contained"
                     color="secondary"
                     disabled={!isValid}
@@ -108,7 +105,7 @@ const RatesForm = () => {
                     <span>Guardar</span>
                 </Button>
             </motion.div>
-            <Grid item xs={12} sm={12} >
+            <Grid item xs={12} sm={12}>
                 <Controller
                     name="description"
                     control={control}
@@ -116,7 +113,6 @@ const RatesForm = () => {
                     render={({ field }) => (
                         <TextField
                             {...field}
-                            className="mt-8 mb-16"
                             error={!!errors.description}
                             helperText={errors?.description?.message}
                             label="Descripción"
@@ -136,7 +132,6 @@ const RatesForm = () => {
                     render={({ field }) => (
                         <TextField
                             {...field}
-                            className="mt-8 mb-16"
                             error={!!errors.value}
                             helperText={errors?.value?.message}
                             label="Valor"
@@ -148,7 +143,7 @@ const RatesForm = () => {
                     )}
                 />
             </Grid>
-            <Grid item xs={12} sm={12} md={6} >
+            <Grid item xs={12} sm={12} md={6}>
                 <Controller
                     name="type"
                     control={control}
@@ -156,7 +151,6 @@ const RatesForm = () => {
                     render={({ field }) => (
                         <TextField
                             {...field}
-                            className="mt-8 mb-16"
                             error={!!errors.type}
                             helperText={errors?.type?.message}
                             label="Tipo"
@@ -176,7 +170,6 @@ const RatesForm = () => {
                     render={({ field }) => (
                         <TextField
                             {...field}
-                            className="mt-8 mb-16"
                             error={!!errors.observations}
                             helperText={errors?.observations?.message}
                             label="Observaciones"

@@ -10,8 +10,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingScreen from "../../../pages/loadingScreen";
-import { deleteRate, loadRates, setEntityToUpdate } from "../store/actions";
-import TableHead from "./tableHead";
+import {
+    deleteRate,
+    loadRates,
+    setEntityToUpdate,
+} from "../store/actions/rates";
+import RatesTableHead from "./tableHead";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -45,12 +49,16 @@ const RatesTable = () => {
         // eslint-disable-next-line
     }, [loaded, deleted, deletingError]);
 
-
-    const filterData = () => {
+    const filteredData = () => {
         return data.filter(
-            data => data.description.toLowerCase().includes(searchText.toLowerCase()) |
-                    data.value.toString().includes(searchText.toLowerCase()) |
-                    data.observations.toLowerCase().includes(searchText.toLowerCase())
+            data =>
+                data.description
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase()) |
+                data.value.toString().includes(searchText.toLowerCase()) |
+                data.observations
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase())
         );
     };
 
@@ -75,80 +83,75 @@ const RatesTable = () => {
         return <LoadingScreen />;
     }
 
-    if(filterData().length === 0){
-        return(
-        <Typography
-            style={{
-                textAlign: "center",
-                margin: 50
-            }}
-            variant="h4"
-            color="textSecondary"
+    if (filteredData().length === 0) {
+        return (
+            <Typography
+                style={{
+                    textAlign: "center",
+                    margin: 50,
+                }}
+                variant="h4"
+                color="textSecondary"
             >
-            No hay datos
-        </Typography>
-        )
+                No hay datos
+            </Typography>
+        );
     }
 
     return (
-        <div>
-            <Table>
-                <TableHead />
-                <TableBody>
-                    {filterData()
-                        .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                        )
-                        .map((element, i) => {
-                            return (
-                                <TableRow
-                                    hover
-                                    key={i}
-                                    sx={{
-                                        "&:last-child td, &:last-child th": {
-                                            border: 0,
-                                        },
-                                    }}
-                                >
-                                    <TableCell align="left">
-                                        {element.description}
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        {element.value}
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        {element.type}
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        {element.observations}
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        <Button
+        <Table>
+            <RatesTableHead />
+            <TableBody>
+                {filteredData()
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((element, i) => {
+                        return (
+                            <TableRow
+                                hover
+                                key={i}
+                                sx={{
+                                    "&:last-child td, &:last-child th": {
+                                        border: 0,
+                                    },
+                                }}
+                            >
+                                <TableCell align="left">
+                                    {element.description}
+                                </TableCell>
+                                <TableCell align="left">
+                                    {element.value}
+                                </TableCell>
+                                <TableCell align="left">
+                                    {element.type}
+                                </TableCell>
+                                <TableCell align="left">
+                                    {element.observations}
+                                </TableCell>
+                                <TableCell align="left">
+                                    <Button
+                                        onClick={() => {
+                                            handleEditClick(element);
+                                        }}
+                                    >
+                                        <EditIcon fontSize="large" />
+                                    </Button>
+                                    <Button>
+                                        <DeleteIcon
+                                            fontSize="large"
                                             onClick={() => {
-                                                handleEditClick(element);
+                                                dispatch(
+                                                    deleteRate(element._id)
+                                                );
                                             }}
-                                        >
-                                            <EditIcon fontSize="large" />
-                                        </Button>
-                                        <Button>
-                                            <DeleteIcon
-                                                fontSize="large"
-                                                onClick={() => {
-                                                    dispatch(
-                                                        deleteRate(element._id)
-                                                    );
-                                                }}
-                                            />
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
-                </TableBody>
-            </Table>
+                                        />
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
+            </TableBody>
             <TablePagination
-                count={filterData().length}
+                count={filteredData().length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 backIconButtonProps={{
@@ -160,7 +163,7 @@ const RatesTable = () => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
-        </div>
+        </Table>
     );
 };
 

@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { useDispatch } from "react-redux";
-import { setSearchText } from "./store/actions";
+import { setSearchText } from "./store/actions/rates";
 
 const useStyles = makeStyles({
     container: {
@@ -49,7 +49,7 @@ const RatesHeader = () => {
     const dispatch = useDispatch();
 
     const searchEntity = e => {
-        dispatch(setSearchText(e.target.value))
+        dispatch(setSearchText(e.target.value));
     };
 
     return (

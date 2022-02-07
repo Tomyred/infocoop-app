@@ -1,5 +1,5 @@
 import * as types from "../types";
-import * as api from "../api";
+import * as api from "../api/rates";
 
 export const loadRates = () => async dispatch => {
     try {
@@ -53,12 +53,11 @@ export const saveRate = rate => async dispatch => {
 export const setEntityToUpdate = entity => dispatch => {
     dispatch({
         type: types.SET_ENTITY_TO_UPDATE,
-        payload: entity
-    })
-}
+        payload: entity,
+    });
+};
 
 export const updateRate = (entity, id) => async dispatch => {
-
     try {
         dispatch({
             type: types.RATE_SAVE_INIT,
@@ -80,35 +79,34 @@ export const updateRate = (entity, id) => async dispatch => {
             type: types.RATE_SAVE_FAILED,
         });
     }
-}
+};
 
-export const deleteRate = (id) => async dispatch => {
-    
+export const deleteRate = id => async dispatch => {
     try {
         dispatch({
-            type: types.RATE_DELETE_INIT
-        })
+            type: types.RATE_DELETE_INIT,
+        });
 
-        const res = await api.remove(id)
-        if(res.data.error === false){
+        const res = await api.remove(id);
+        if (res.data.error === false) {
             dispatch({
-                type: types.RATE_DELETE_SUCCEED
-            })
-        }else{
+                type: types.RATE_DELETE_SUCCEED,
+            });
+        } else {
             dispatch({
-                type: types.RATE_DELETE_FAILED
-            })
+                type: types.RATE_DELETE_FAILED,
+            });
         }
     } catch (error) {
         dispatch({
-            type: types.RATE_DELETE_FAILED
-        })
+            type: types.RATE_DELETE_FAILED,
+        });
     }
-}
+};
 
-export const setSearchText = (searchText) => dispatch => {
+export const setSearchText = searchText => dispatch => {
     dispatch({
         type: types.SEARCH_ENTRY,
-        payload: searchText
-    })
-}
+        payload: searchText,
+    });
+};
