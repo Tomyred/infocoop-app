@@ -14,6 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { deleteLink, loadLinks } from "./store/actions/keypad";
 import KeypadForm from "./dialog/form";
+import LoadingScreen from "../../pages/loadingScreen";
 
 // const useStyles = makeStyles(theme => ({
 //     header: {
@@ -79,9 +80,9 @@ const LinksKeypad = () => {
     const dispatch = useDispatch();
     const links = useSelector(store => store.keypad.data);
     const loaded = useSelector(store => store.keypad.loaded);
+    const loading = useSelector(store => store.keypad.loading);
     const saved = useSelector(store => store.keypad.saved);
     const deleted = useSelector(store => store.keypad.deleted);
-
     const [searchText, setSearchText] = useState("");
     const [dialogToggler, setDialogToggler] = useState(false);
 
@@ -164,72 +165,76 @@ const LinksKeypad = () => {
                 </Fab>
             </div>
 
-            <motion.div
-                className="flex flex-wrap py-24"
-                initial="hidden"
-                animate="show"
-                variants={item}
-            >
-                <motion.div className={classes.cardContainer}>
-                    {filteredData().map(link => (
-                        <Card
-                            className={classes.card}
-                            elevation={5}
-                            key={link._id}
-                        >
-                            <div
-                                className={classes.cardHeader}
-                                style={{ backgroundColor: link.color }}
+            {loading ? (
+                <LoadingScreen />
+            ) : (
+                <motion.div
+                    className="flex flex-wrap py-24"
+                    initial="hidden"
+                    animate="show"
+                    variants={item}
+                >
+                    <motion.div className={classes.cardContainer}>
+                        {filteredData().map(link => (
+                            <Card
+                                className={classes.card}
+                                elevation={5}
+                                key={link._id}
                             >
-                                <div>
-                                    <Icon
-                                        style={{
-                                            cursor: "pointer",
-                                        }}
-                                    >
-                                        edit
-                                    </Icon>
-                                    <Icon
-                                        style={{
-                                            cursor: "pointer",
-                                        }}
-                                        onClick={() => {
-                                            dispatch(deleteLink(link._id));
-                                        }}
-                                    >
-                                        delete
-                                    </Icon>
+                                <div
+                                    className={classes.cardHeader}
+                                    style={{ backgroundColor: link.color }}
+                                >
+                                    <div>
+                                        <Icon
+                                            style={{
+                                                cursor: "pointer",
+                                            }}
+                                        >
+                                            edit
+                                        </Icon>
+                                        <Icon
+                                            style={{
+                                                cursor: "pointer",
+                                            }}
+                                            onClick={() => {
+                                                dispatch(deleteLink(link._id));
+                                            }}
+                                        >
+                                            delete
+                                        </Icon>
+                                    </div>
                                 </div>
-                            </div>
-                            <CardContent className={classes.cardContent}>
-                                <Typography
-                                    variant="h6"
-                                    className="text-center text-16 font-medium"
-                                >
-                                    {link.title}
-                                </Typography>
-                                <Typography
-                                    className="text-center text-13 mt-8 font-normal"
-                                    color="textSecondary"
-                                >
-                                    {link.description}
-                                </Typography>
-                            </CardContent>
-                            <CardActions className={classes.cardActions}>
-                                <Button
-                                    style={{ borderRadius: 50 }}
-                                    target="_blank"
-                                    href={link.url}
-                                    color="primary"
-                                    variant="outlined"
-                                >
-                                    Ir
-                                </Button>
-                            </CardActions>
-                        </Card>
-                    ))}
+                                <CardContent className={classes.cardContent}>
+                                    <Typography
+                                        variant="h6"
+                                        className="text-center text-16 font-medium"
+                                    >
+                                        {link.title}
+                                    </Typography>
+                                    <Typography
+                                        className="text-center text-13 mt-8 font-normal"
+                                        color="textSecondary"
+                                    >
+                                        {link.description}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions className={classes.cardActions}>
+                                    <Button
+                                        style={{ borderRadius: 50 }}
+                                        target="_blank"
+                                        href={link.url}
+                                        color="primary"
+                                        variant="outlined"
+                                    >
+                                        Ir
+                                    </Button>
+                                </CardActions>
+                            </Card>
+                        ))}
+                    </motion.div>
                 </motion.div>
-            </motion.div>
+            )}
         </motion.div>
     );
 };
