@@ -53,10 +53,11 @@ const useStyles = makeStyles({
         height: 256,
         minWidth: 250,
         position: "relative",
-        marginTop: 10,
+        marginTop: 25,
     },
     cardHeader: {
-        textAlign: "end",
+        display: "flex",
+        justifyContent: "space-between",
         padding: 10,
     },
     cardContent: {
@@ -82,6 +83,7 @@ const LinksKeypad = () => {
     const loaded = useSelector(store => store.keypad.loaded);
     const loading = useSelector(store => store.keypad.loading);
     const saved = useSelector(store => store.keypad.saved);
+    const deleting = useSelector(store => store.keypad.deleting);
     const deleted = useSelector(store => store.keypad.deleted);
     const [searchText, setSearchText] = useState("");
     const [dialogToggler, setDialogToggler] = useState(false);
@@ -165,7 +167,7 @@ const LinksKeypad = () => {
                 </Fab>
             </div>
 
-            {loading ? (
+            {loading || deleting ? (
                 <LoadingScreen />
             ) : (
                 <motion.div
@@ -185,38 +187,30 @@ const LinksKeypad = () => {
                                     className={classes.cardHeader}
                                     style={{ backgroundColor: link.color }}
                                 >
-                                    <div>
-                                        <Icon
-                                            style={{
-                                                cursor: "pointer",
-                                            }}
-                                        >
-                                            edit
-                                        </Icon>
-                                        <Icon
-                                            style={{
-                                                cursor: "pointer",
-                                            }}
-                                            onClick={() => {
-                                                dispatch(deleteLink(link._id));
-                                            }}
-                                        >
-                                            delete
-                                        </Icon>
-                                    </div>
+                                    <Typography variant="h6">
+                                        {link.title}
+                                    </Typography>
+
+                                    <Icon
+                                        style={{
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={() => {
+                                            dispatch(deleteLink(link._id));
+                                        }}
+                                    >
+                                        delete
+                                    </Icon>
                                 </div>
                                 <CardContent className={classes.cardContent}>
                                     <Typography
-                                        variant="h6"
+                                        variant="subtitle1"
                                         className="text-center text-16 font-medium"
                                     >
-                                        {link.title}
-                                    </Typography>
-                                    <Typography
-                                        className="text-center text-13 mt-8 font-normal"
-                                        color="textSecondary"
-                                    >
                                         {link.description}
+                                    </Typography>
+                                    <Typography color="textSecondary">
+                                        {link.url}
                                     </Typography>
                                 </CardContent>
                                 <CardActions className={classes.cardActions}>
