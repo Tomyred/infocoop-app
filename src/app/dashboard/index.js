@@ -125,6 +125,7 @@ function Dashboard() {
                 </Box>
                 <Box
                     component="main"
+                    className={classes.componentContainer}
                     sx={{
                         flexGrow: 1,
                         p: 3,

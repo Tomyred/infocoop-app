@@ -133,7 +133,7 @@ const KeypadForm = props => {
                             <Controller
                                 name="color"
                                 control={control}
-                                defaultValue=""
+                                defaultValue="#2196f3"
                                 render={({ field: { onChange, value } }) => (
                                     <FormControl
                                         size="small"

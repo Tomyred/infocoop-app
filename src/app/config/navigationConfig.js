@@ -23,6 +23,16 @@ const navigationConfig = [
         icon: "business",
         route: "/keypad",
     },
+    {
+        title: "MCG",
+        icon: "play_arrow",
+        route: "/mcg",
+    },
+    {
+        title: "Talleres cooperativos",
+        icon: "park",
+        route: "/cooperative-workshops",
+    },
 ];
 
 export default navigationConfig;
