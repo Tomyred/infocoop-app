@@ -5,11 +5,11 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
     container: {
-        height: "70vh",
+        height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        textAlign: "center"
+        textAlign: "center",
     },
 });
 

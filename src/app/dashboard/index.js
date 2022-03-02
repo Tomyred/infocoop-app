@@ -23,10 +23,12 @@ import Sidebar from "./sidebar";
 const drawerWidth = 240;
 
 const useStyles = makeStyles({
+    bigContainer: {
+        height: "100vh",
+    },
     componentContainer: {
-        padding: 25,
-        overflowX: "auto",
-        overflowY: "auto",
+        overflow: "auto",
+        height: "90%",
     },
     toolbar: {
         display: "flex",
@@ -51,7 +53,7 @@ function Dashboard() {
 
     return (
         <ThemeProvider theme={themes}>
-            <Box sx={{ display: "flex" }}>
+            <Box className={classes.bigContainer} sx={{ display: "flex" }}>
                 <DashboardDialog
                     open={dialogToggler}
                     setDialogToggler={setDialogToggler}

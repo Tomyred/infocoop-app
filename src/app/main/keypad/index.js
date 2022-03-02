@@ -16,23 +16,6 @@ import { deleteLink, loadLinks } from "./store/actions/keypad";
 import KeypadForm from "./dialog/form";
 import LoadingScreen from "../../pages/loadingScreen";
 
-// const useStyles = makeStyles(theme => ({
-//     header: {
-//         background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
-//         color: theme.palette.getContrastText(theme.palette.primary.main),
-//     },
-//     headerIcon: {
-//         position: "absolute",
-//         top: -64,
-//         left: 0,
-//         opacity: 0.04,
-//         fontSize: 512,
-//         width: 512,
-//         height: 512,
-//         pointerEvents: "none",
-//     },
-// }));
-
 const useStyles = makeStyles({
     header: {
         display: "flex",

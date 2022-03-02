@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const RatesTable = () => {
+const RatesTable = ({ classes }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const loading = useSelector(store => store.rates.loading);
@@ -99,57 +99,62 @@ const RatesTable = () => {
     }
 
     return (
-        <Table>
-            <RatesTableHead />
-            <TableBody>
-                {filteredData()
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((element, i) => {
-                        return (
-                            <TableRow
-                                hover
-                                key={i}
-                                sx={{
-                                    "&:last-child td, &:last-child th": {
-                                        border: 0,
-                                    },
-                                }}
-                            >
-                                <TableCell align="left">
-                                    {element.description}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {element.value}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {element.type}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {element.observations}
-                                </TableCell>
-                                <TableCell align="left">
-                                    <Button
-                                        onClick={() => {
-                                            handleEditClick(element);
-                                        }}
-                                    >
-                                        <EditIcon fontSize="large" />
-                                    </Button>
-                                    <Button>
-                                        <DeleteIcon
-                                            fontSize="large"
+        <div>
+            <Table>
+                <RatesTableHead />
+                <TableBody>
+                    {filteredData()
+                        .slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage
+                        )
+                        .map((element, i) => {
+                            return (
+                                <TableRow
+                                    hover
+                                    key={i}
+                                    sx={{
+                                        "&:last-child td, &:last-child th": {
+                                            border: 0,
+                                        },
+                                    }}
+                                >
+                                    <TableCell align="left">
+                                        {element.description}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {element.value}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {element.type}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        {element.observations}
+                                    </TableCell>
+                                    <TableCell align="left">
+                                        <Button
                                             onClick={() => {
-                                                dispatch(
-                                                    deleteRate(element._id)
-                                                );
+                                                handleEditClick(element);
                                             }}
-                                        />
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        );
-                    })}
-            </TableBody>
+                                        >
+                                            <EditIcon fontSize="large" />
+                                        </Button>
+                                        <Button>
+                                            <DeleteIcon
+                                                fontSize="large"
+                                                onClick={() => {
+                                                    dispatch(
+                                                        deleteRate(element._id)
+                                                    );
+                                                }}
+                                            />
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            );
+                        })}
+                </TableBody>
+            </Table>
             <TablePagination
                 count={filteredData().length}
                 rowsPerPage={rowsPerPage}
@@ -163,7 +168,7 @@ const RatesTable = () => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
-        </Table>
+        </div>
     );
 };
 

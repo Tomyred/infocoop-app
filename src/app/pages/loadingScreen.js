@@ -5,18 +5,18 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
     container: {
-        margin: 150,
+        height: "50vh",
+        width: "100%",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
-        textAlign: "center",
         alignItems: "center",
+        textAlign: "center",
+        padding: 20,
     },
-    containerChild: {
-        width: "100%"
-    },
-    element: {
-        margin: 40
-
+    progress: {
+        width: "100%",
+        margin: 20,
     },
 });
 
@@ -24,16 +24,14 @@ const LoadingScreen = () => {
     const classes = useStyles();
     return (
         <div className={classes.container}>
-            <div className={classes.containerChild} >
-                <Typography
-                    className={classes.element}
-                    variant="h4"
-                    color="textSecondary"
-                >
-                    Cargando...
-                </Typography>
-                <LinearProgress className={classes.element} color="secondary" />
-            </div> 
+            <Typography
+                className={classes.progress}
+                variant="h4"
+                color="textSecondary"
+            >
+                Cargando...
+            </Typography>
+            <LinearProgress className={classes.progress} color="secondary" />
         </div>
     );
 };
